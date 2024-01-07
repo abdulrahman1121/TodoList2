@@ -18,31 +18,33 @@ const addTodo = (event) => {
 };
 
 const createTodo = (todoText, completed) => {
-    const todoDiv = document.createElement('div');
-    todoDiv.classList.add('todo');
+    if (todoText !== undefined && todoText.trim() !== ''){
+        const todoDiv = document.createElement('div');
+        todoDiv.classList.add('todo');
+    
+        const newTodo = document.createElement('li');
+        newTodo.innerText = todoText;
+        newTodo.classList.add('todo-item');
+        todoDiv.appendChild(newTodo);
+    
+        const completedButton = document.createElement('button');
+        completedButton.classList.add('complete-btn');
+        completedButton.innerHTML = '<i class="fa-solid fa-check"></i>';
+        todoDiv.appendChild(completedButton);
+    
+        const trashButton = document.createElement('button');
+        trashButton.classList.add('trash-btn');
+        trashButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
+        todoDiv.appendChild(trashButton);
+    
+        if (completed) {
+            todoDiv.classList.add('completed');
+        }
+    
+        todoList.appendChild(todoDiv);
+    };
 
-    const newTodo = document.createElement('li');
-    newTodo.innerText = todoText;
-    newTodo.classList.add('todo-item');
-    todoDiv.appendChild(newTodo);
-
-    const completedButton = document.createElement('button');
-    completedButton.classList.add('complete-btn');
-    completedButton.innerHTML = '<i class="fa-solid fa-check"></i>';
-    todoDiv.appendChild(completedButton);
-
-    const trashButton = document.createElement('button');
-    trashButton.classList.add('trash-btn');
-    trashButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
-    todoDiv.appendChild(trashButton);
-
-    if (completed) {
-        todoDiv.classList.add('completed');
-    }
-
-    todoList.appendChild(todoDiv);
-};
-
+}
 const deleteCheck = (event) => {
     const item = event.target;
 
